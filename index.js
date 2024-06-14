@@ -2,9 +2,17 @@
 import { central, db1, db2, db3, vault } from "./databases.js";
 
 async function getUserData(id) {
-  const databaseIdentifier= await central(id); 
+  try{
+    //get database identifier from central db
+  const databaseIdentifier= await central(id);
+  
+  //Use identifier to access correct identifier
   const userData = await dbs[databaseIdentifier](id);
-  const personalData = await vault(id)
+ 
+ //get the uers personal data
+  const personalData = await vault(id);
+  
+  //combine all of it?
   const userDataObject = {
     id: id,
     name: personalData.name,
@@ -14,8 +22,10 @@ async function getUserData(id) {
     website: userData.website,
     company: userData.company
   };
-  return userDataObject
+  return userDataObject;
 } catch(error){
-  throw new Error(`Error fetching user data:`)
+  throw new Error(`Error fetching user data: ${error.message}`)
+}
 }
 
+(userDataObject)

@@ -1,5 +1,7 @@
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const returnedValue = await Promise.resolve(vault(1)); 
+console.log(returnedValue)
 /**
  * Accepts a user id value and returns a string containing
  * the database that user's information can be found in.
@@ -96,3 +98,4 @@ export async function vault(id) {
     phone: json.phone
   };
 }
+
